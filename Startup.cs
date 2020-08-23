@@ -43,7 +43,7 @@ namespace InventoryApp
 
             }).AddXmlSerializerFormatters();
 
-            // **** end autorizacijski policy
+            // **** end autorizacijski policy dodano nakon implementacije GIT-a
 
             services.AddControllersWithViews();
 
