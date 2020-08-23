@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityUser>
+@{
+    ViewBag.Title = ">Svi korisnici";
+}
+<h1>Korisnici</h1>
+<p><a asp-area="Identity" asp-page="/Account/Register">Create</a></p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayName("Korisničko ime")
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => user.UserName)
+                        </td>
+                        <td>
+                            <form asp-action="DeleteUser" asp-route-id="@user.Id" method="post">
+                                <span id="confirmDeleteSpan_@user.Id" style="display:none">
+                                    <span> Jeste li sigurni da želite obrisati zapis? </span>
+                                    <button type="submit" class="btn btn-danger">Da</button>
+                                    <a href="#" class="btn btn-primary" onclick="confirmDelete('@user.Id', false)">Ne</a>
+                                </span>
+                                <span id="deleteSpan_@user.Id">
+                                    <a href="#" class="btn btn-danger" onclick="confirmDelete('@user.Id', true)">Obriši</a>
+                                </span>
+
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+
+

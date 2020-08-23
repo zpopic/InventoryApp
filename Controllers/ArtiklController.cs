@@ -1,0 +1,186 @@
+﻿using InventoryApp.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
+using System.Data.Common;
+using System.Linq;
+using System.Threading.Tasks;
+
+
+namespace InventoryApp.Controllers
+{
+    public class ArtiklController : Controller
+    {
+        private readonly inventoryContext _context;
+
+        public ArtiklController(inventoryContext context)
+        {
+            _context = context;
+        }
+
+        // GET: Artikl
+        public async Task<IActionResult> Index()
+        {
+            var inventoryContext = _context.Artikl.Include(a => a.Izvedba).Include(a => a.Kategorija).Include(a => a.Tip).Include(a => a.Vrsta);
+            return View(await inventoryContext.ToListAsync());
+        }
+
+        // GET: Artikl/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var artikl = await _context.Artikl
+                .Include(a => a.Izvedba)
+                .Include(a => a.Kategorija)
+                .Include(a => a.Tip)
+                .Include(a => a.Vrsta)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (artikl == null)
+            {
+                return NotFound();
+            }
+
+            return View(artikl);
+        }
+
+
+
+
+
+        // GET: Artikl/Create
+        public IActionResult Create()
+        {
+
+            ViewData["KategorijaId"] = new SelectList(_context.Kategorija, "Id", "Naziv");
+            ViewData["VrstaId"] = new SelectList(_context.Vrsta, "Id", "Naziv");
+            ViewData["TipId"] = new SelectList(_context.Tip, "Id", "Naziv");
+            ViewData["IzvedbaId"] = new SelectList(_context.Izvedba, "Id", "Naziv");
+
+            return View();
+
+        }
+
+
+        // POST: Artikl/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,Ident,PocetnoStanje,AktualnoStanje,ZavrsnoStanje,UsrChanged,IzvedbaId,TipId,VrstaId,KategorijaId")] Artikl artikl)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(artikl);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["IzvedbaId"] = new SelectList(_context.Izvedba, "Id", "Naziv", artikl.IzvedbaId);
+            ViewData["KategorijaId"] = new SelectList(_context.Kategorija, "Id", "Naziv", artikl.KategorijaId);
+            ViewData["TipId"] = new SelectList(_context.Tip, "Id", "Naziv", artikl.TipId);
+            ViewData["VrstaId"] = new SelectList(_context.Vrsta, "Id", "Naziv", artikl.VrstaId);
+            return View(artikl);
+        }
+
+        // GET: Artikl/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var artikl = await _context.Artikl.FindAsync(id);
+            if (artikl == null)
+            {
+                return NotFound();
+            }
+            ViewData["IzvedbaId"] = new SelectList(_context.Izvedba, "Id", "Naziv", artikl.IzvedbaId);
+            ViewData["KategorijaId"] = new SelectList(_context.Kategorija, "Id", "Naziv", artikl.KategorijaId);
+            ViewData["TipId"] = new SelectList(_context.Tip, "Id", "Naziv", artikl.TipId);
+            ViewData["VrstaId"] = new SelectList(_context.Vrsta, "Id", "Naziv", artikl.VrstaId);
+            return View(artikl);
+        }
+
+        // POST: Artikl/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Ident,PocetnoStanje,AktualnoStanje,ZavrsnoStanje,UsrChanged,IzvedbaId,TipId,VrstaId,KategorijaId")] Artikl artikl)
+        {
+            if (id != artikl.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(artikl);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ArtiklExists(artikl.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            ViewData["IzvedbaId"] = new SelectList(_context.Izvedba, "Id", "Naziv", artikl.IzvedbaId);
+            ViewData["KategorijaId"] = new SelectList(_context.Kategorija, "Id", "Naziv", artikl.KategorijaId);
+            ViewData["TipId"] = new SelectList(_context.Tip, "Id", "Naziv", artikl.TipId);
+            ViewData["VrstaId"] = new SelectList(_context.Vrsta, "Id", "Naziv", artikl.VrstaId);
+            return View(artikl);
+        }
+
+        // GET: Artikl/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var artikl = await _context.Artikl
+                .Include(a => a.Izvedba)
+                .Include(a => a.Kategorija)
+                .Include(a => a.Tip)
+                .Include(a => a.Vrsta)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (artikl == null)
+            {
+                return NotFound();
+            }
+
+            return View(artikl);
+        }
+
+        // POST: Artikl/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var artikl = await _context.Artikl.FindAsync(id);
+            _context.Artikl.Remove(artikl);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool ArtiklExists(int id)
+        {
+            return _context.Artikl.Any(e => e.Id == id);
+        }
+    }
+}

@@ -1,0 +1,105 @@
+﻿@model IEnumerable<InventoryApp.Models.Artikl>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Inventura artikala</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+            </th>
+            <th>
+            </th>
+            <th>
+            </th>
+            <th>
+            </th>
+            <th>
+            </th>
+            <th colspan="3" style="text-align:center"> STANJE Artikala (KOM)
+            </th>
+            <th colspan="2">
+  
+            </th>
+
+        </tr>
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ident)
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Kategorija)*@
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tip)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vrsta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Izvedba)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PocetnoStanje)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AktualnoStanje)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ZavrsnoStanje)
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.UsrChanged)*@
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Ident)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.Kategorija.Naziv)*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tip.Naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vrsta.Naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Izvedba.Naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PocetnoStanje)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AktualnoStanje)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ZavrsnoStanje)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.UsrChanged)*@
+            </td>
+
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

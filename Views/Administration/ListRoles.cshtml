@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
+@{
+   ViewBag.Title = "Sve role";
+}
+
+<h1>Role</h1>
+<p>
+    <a asp-action="CreateRole" asp-controller="Administration">Create</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Naziv Role")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var role in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => role.Name)
+                </td>
+                <td>
+                    <form asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
+                        <span id="confirmDeleteSpan_@role.Id" style="display:none">
+                            <span> Jeste li sigurni da želite obrisati zapis? </span>
+                            <button type="submit" class="btn btn-danger">Da</button>
+                            <a href="#" class="btn btn-primary" onclick="confirmDelete('@role.Id', false)">Ne</a>
+                        </span>
+                        <span id="deleteSpan_@role.Id">
+                            <a href="#" class="btn btn-danger" onclick="confirmDelete('@role.Id', true)">Obriši</a>
+                            <a class="btn btn-primary" asp-action="EditRole" asp-controller="Administration" asp-route-id="@role.Id">Uredi</a>
+                        </span>
+
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
