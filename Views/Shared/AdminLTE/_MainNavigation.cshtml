@@ -2,6 +2,10 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
+@*@addTagHelper *, NavigationIndicatorHelper*@
+
+@using static InventoryApp.Helpers.NavigationIndicatorHelper
+
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
@@ -12,7 +16,7 @@
 
 
 
-        <!-- Sidebar -->
+    <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
@@ -21,124 +25,125 @@
             </div>
             <div class="info">
                 <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Pozdrav!  @User.Identity.Name!</a>
-                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })"> <button type="submit" class="nav-link btn btn-link">Logout</button>
+                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button type="submit" class="nav-link btn btn-link">Logout</button>
                 </form>
             </div>
         </div>
-                
-
-            <!-- Sidebar Menu -->
-            <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                    <li class="nav-item">
-                        <a asp-controller="Home" asp-action="Index" class="nav-link active">
-                            <i class="nav-icon fas fa-home"></i>
-                            <p>Početna</p>
-                        </a>
-                    </li>
 
 
-                    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                    {
-                        <li class="nav-item has-treeview menu-open">
-                            <a href="#" class="nav-link active">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Administracija
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Administration" asp-action="ListRoles">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Role</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Administration" asp-action="ListUsers">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Korisnici</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Skladiste" asp-action="Index">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Skladišta</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Kategorija" asp-action="Index">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Kategorije</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Vrsta" asp-action="Index">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Vrste</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Tip" asp-action="Index">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Tip</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Izvedba" asp-action="Index">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Izvedba</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Artikl" asp-action="Index">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Artikl</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-
-                    }
-                    else if (SignInManager.IsSignedIn(User))
-
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Hello @User.Identity.Name!</p>     
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                <p>Logoff</p>
-                             </a>
-                        </li>
-                    }
-                    else
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Registracija</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Login</a>
-                        </li>
-                    }
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item">
+                    <a asp-controller="Home" asp-action="Index" class="nav-link active">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>Početna</p>
+                    </a>
+                </li>
 
 
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-th"></i>
+                @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                {
+                    <li class="nav-item has-treeview menu-open">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>
-                                Simple Link
-                                <span class="right badge badge-danger">New</span>
+                                Administracija
+                                <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a class="nav-link @Url.MakeActiveClass("Administration","ListRoles")"  asp-controller="Administration" asp-action="ListRoles">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Role</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @Url.MakeActiveClass("Administration","ListUsers")" asp-controller="Administration" asp-action="ListUsers">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Korisnici</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @Url.MakeActiveClass("Skladiste","Index")" asp-controller="Skladiste" asp-action="Index">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Skladišta</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @Url.MakeActiveClass("Kategorija","Index")" asp-controller="Kategorija" asp-action="Index">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Kategorije</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @Url.MakeActiveClass("Vrsta","Index")" asp-controller="Vrsta" asp-action="Index">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Vrste</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @Url.MakeActiveClass("Tip","Index")" asp-controller="Tip" asp-action="Index">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Tip</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @Url.MakeActiveClass("Izvedba","Index")" asp-controller="Izvedba" asp-action="Index">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Izvedba</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a  class="nav-link @Url.MakeActiveClass("Artikl","Index")"  asp-controller="Artikl" asp-action="Index">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Artikl</p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                </ul>
-            </nav>
-            <!-- /.sidebar-menu -->
-        </div>
-        <!-- /.sidebar -->
-    </aside>
+
+                }
+                else if (SignInManager.IsSignedIn(User))
+
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Hello @User.Identity.Name!</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <p>Logoff</p>
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Registracija</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                    </li>
+                }
+
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Simple Link
+                            <span class="right badge badge-danger">New</span>
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>
