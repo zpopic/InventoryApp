@@ -13,9 +13,16 @@ a {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+/* Ovo je promejna boje na sidebaru za glavne kategorije linikova z skladu s Klik bojom koja je: 54c8e8*/
+.sidebar-dark-primary .nav-sidebar > .nav-item > .nav-link.active, .sidebar-light-primary .nav-sidebar > .nav-item > .nav-link.active > .klik-active {
+    color: #fff;
+    background-color: #54c8e8;
+    border-color: #54c8e8;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
