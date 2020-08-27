@@ -21,9 +21,12 @@ namespace InventoryApp.Controllers
         }
 
         // GET: Tip
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int pageNum=1, int pageSize=3)
         {
-            var inventoryContext = _context.Tip.Include(t => t.Kategorija).Include(t => t.Vrsta);
+            var excludeRec = (pageSize * pageNum) - pageSize;
+
+            var inventoryContext = _context.Tip.Include(t => t.Kategorija).Include(t => t.Vrsta).Skip(excludeRec).Take(pageSize);
+
             return View(await inventoryContext.ToListAsync());
         }
 
