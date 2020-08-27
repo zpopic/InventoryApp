@@ -1,7 +1,7 @@
 ﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 // for details on configuring this project to bundle and minify static web assets.
 
-
+//$(document).ready(function () {
 
 // Write your JavaScript code.
 $('a:contains("Edit")').text('Uredi');
@@ -10,10 +10,10 @@ $('a:contains("Delete")').text('Obriši')
 $('a:contains("Create")').text('Dodavanje')
 $('button:contains("Delete")').addClass('badge badge-pill badge-danger')
 
-$('a:contains("Uredi")').addClass("btn btn-primary btn-sm");
-$('a:contains("Pogledaj")').addClass("btn btn-warning btn-sm");
-$('a:contains("Obriši")').addClass("btn btn-danger btn-sm");
-$('a:contains("Dodavanje")').addClass("btn btn-success btn-sm");
+$('a:contains("Uredi")').addClass("btn btn-primary btn-xs");
+$('a:contains("Pogledaj")').addClass("btn btn-warning btn-xs");
+$('a:contains("Obriši")').addClass("btn btn-danger btn-xs");
+$('a:contains("Dodavanje")').addClass("btn btn-success btn-xs");
 
 
 $('table').each(function () { $(this).find('tr:even').css('background-color', '#ededed') });
@@ -34,7 +34,7 @@ function confirmDelete(uniqeUserId, isDeleteClicked) {
 
 
 
-$(document).ready(function () {
+
 
     var kat = $('#kat');
     var vrst = $('#vrst');
@@ -75,4 +75,4 @@ $(document).ready(function () {
 
     });
 
-});
+//});

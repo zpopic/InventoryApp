@@ -1,8 +1,6 @@
-﻿using System;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace InventoryApp.Models
 {
@@ -51,6 +49,7 @@ namespace InventoryApp.Models
         {
             base.OnModelCreating(modelBuilder);
 
+
             modelBuilder.Entity<Artikl>(entity =>
             {
                 entity.ToTable("artikl");
@@ -82,6 +81,11 @@ namespace InventoryApp.Models
                     .IsUnicode(false)
                     .HasDefaultValueSql("'NULL'");
 
+                entity.Property(e => e.Izlaz)
+                    .HasColumnName("izlaz")
+                    .HasColumnType("int(11)")
+                    .HasDefaultValueSql("'NULL'");
+
                 entity.Property(e => e.IzvedbaId)
                     .HasColumnName("izvedba_Id")
                     .HasColumnType("int(10) unsigned");
@@ -89,6 +93,12 @@ namespace InventoryApp.Models
                 entity.Property(e => e.KategorijaId)
                     .HasColumnName("kategorija_Id")
                     .HasColumnType("int(10) unsigned");
+
+                entity.Property(e => e.Napomena)
+                    .HasColumnName("napomena")
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("'NULL'");
 
                 entity.Property(e => e.PocetnoStanje)
                     .HasColumnName("pocetno_stanje")
@@ -98,6 +108,11 @@ namespace InventoryApp.Models
                 entity.Property(e => e.TipId)
                     .HasColumnName("tip_Id")
                     .HasColumnType("int(10) unsigned");
+
+                entity.Property(e => e.Ulaz)
+                    .HasColumnName("ulaz")
+                    .HasColumnType("int(11)")
+                    .HasDefaultValueSql("'NULL'");
 
                 entity.Property(e => e.UsrChanged)
                     .HasColumnName("usr_changed")
@@ -160,8 +175,24 @@ namespace InventoryApp.Models
                     .HasColumnName("edit_time")
                     .HasDefaultValueSql("'NULL'");
 
+                entity.Property(e => e.Izlaz)
+                    .HasColumnName("izlaz")
+                    .HasColumnType("int(11)")
+                    .HasDefaultValueSql("'NULL'");
+
+                entity.Property(e => e.Napomena)
+                    .HasColumnName("napomena")
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("'NULL'");
+
                 entity.Property(e => e.PocetnoStanje)
                     .HasColumnName("pocetno_stanje")
+                    .HasColumnType("int(11)")
+                    .HasDefaultValueSql("'NULL'");
+
+                entity.Property(e => e.Ulaz)
+                    .HasColumnName("ulaz")
                     .HasColumnType("int(11)")
                     .HasDefaultValueSql("'NULL'");
 

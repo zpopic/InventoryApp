@@ -1,12 +1,11 @@
-﻿using InventoryApp.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
-using System.Data.Common;
-using System.Linq;
-using System.Threading.Tasks;
-
+using InventoryApp.Models;
 
 namespace InventoryApp.Controllers
 {
@@ -48,30 +47,22 @@ namespace InventoryApp.Controllers
             return View(artikl);
         }
 
-
-
-
-
         // GET: Artikl/Create
         public IActionResult Create()
         {
-
-            ViewData["KategorijaId"] = new SelectList(_context.Kategorija, "Id", "Naziv");
-            ViewData["VrstaId"] = new SelectList(_context.Vrsta, "Id", "Naziv");
-            ViewData["TipId"] = new SelectList(_context.Tip, "Id", "Naziv");
             ViewData["IzvedbaId"] = new SelectList(_context.Izvedba, "Id", "Naziv");
-
+            ViewData["KategorijaId"] = new SelectList(_context.Kategorija, "Id", "Naziv");
+            ViewData["TipId"] = new SelectList(_context.Tip, "Id", "Naziv");
+            ViewData["VrstaId"] = new SelectList(_context.Vrsta, "Id", "Naziv");
             return View();
-
         }
-
 
         // POST: Artikl/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Ident,PocetnoStanje,AktualnoStanje,ZavrsnoStanje,UsrChanged,IzvedbaId,TipId,VrstaId,KategorijaId")] Artikl artikl)
+        public async Task<IActionResult> Create([Bind("Id,Ident,PocetnoStanje,Ulaz,Izlaz,AktualnoStanje,ZavrsnoStanje,UsrChanged,IzvedbaId,TipId,VrstaId,KategorijaId,Napomena")] Artikl artikl)
         {
             if (ModelState.IsValid)
             {
@@ -111,7 +102,7 @@ namespace InventoryApp.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Ident,PocetnoStanje,AktualnoStanje,ZavrsnoStanje,UsrChanged,IzvedbaId,TipId,VrstaId,KategorijaId")] Artikl artikl)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Ident,PocetnoStanje,Ulaz,Izlaz,AktualnoStanje,ZavrsnoStanje,UsrChanged,IzvedbaId,TipId,VrstaId,KategorijaId,Napomena")] Artikl artikl)
         {
             if (id != artikl.Id)
             {

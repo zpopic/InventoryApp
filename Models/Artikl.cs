@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.Collections.Generic;
 
 namespace InventoryApp.Models
 {
@@ -6,20 +7,17 @@ namespace InventoryApp.Models
     {
         public int Id { get; set; }
         public string Ident { get; set; }
-
-        [DisplayName("Početno")]
         public int? PocetnoStanje { get; set; }
-        [DisplayName("Aktualno")]
+        public int? Ulaz { get; set; }
+        public int? Izlaz { get; set; }
         public int? AktualnoStanje { get; set; }
-        [DisplayName("Završno")]
         public int? ZavrsnoStanje { get; set; }
-        [DisplayName("Korisnik")]
         public string UsrChanged { get; set; }
-        [DisplayName("Izvedba")]
         public int IzvedbaId { get; set; }
         public int TipId { get; set; }
         public int VrstaId { get; set; }
         public int KategorijaId { get; set; }
+        public string Napomena { get; set; }
 
         public virtual Izvedba Izvedba { get; set; }
         public virtual Kategorija Kategorija { get; set; }
