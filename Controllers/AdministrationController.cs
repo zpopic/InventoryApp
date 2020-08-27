@@ -104,7 +104,7 @@ namespace InventoryApp.Controllers
                 {
 
                     model.Users.Add(user.UserName); //model je tu ova instanca gore var model =...
-
+                                       
                 }
             }
 

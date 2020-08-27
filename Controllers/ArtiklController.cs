@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using InventoryApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using InventoryApp.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace InventoryApp.Controllers
 {
     public class ArtiklController : Controller
     {
+      
         private readonly inventoryContext _context;
 
         public ArtiklController(inventoryContext context)
@@ -18,11 +18,16 @@ namespace InventoryApp.Controllers
             _context = context;
         }
 
+
+
+
         // GET: Artikl
         public async Task<IActionResult> Index()
         {
             var inventoryContext = _context.Artikl.Include(a => a.Izvedba).Include(a => a.Kategorija).Include(a => a.Tip).Include(a => a.Vrsta);
+
             return View(await inventoryContext.ToListAsync());
+
         }
 
         // GET: Artikl/Details/5
@@ -44,8 +49,43 @@ namespace InventoryApp.Controllers
                 return NotFound();
             }
 
+
+
             return View(artikl);
         }
+
+
+
+
+
+
+        public async Task<IActionResult> Rekalkulacija(Artikl artikl)
+        {
+ 
+            if (ModelState.IsValid)
+            {
+
+                var artikli = await _context.Artikl.ToListAsync();
+
+                foreach (var item in artikli)
+                {
+
+                    item.ZavrsnoStanje = item.PocetnoStanje - item.AktualnoStanje;
+               
+
+                    _context.Add(artikl);
+                    await _context.SaveChangesAsync();
+                }
+                  
+            }
+
+            return RedirectToAction(nameof(Index));
+
+        
+        }
+
+
+
 
         // GET: Artikl/Create
         public IActionResult Create()
@@ -66,6 +106,7 @@ namespace InventoryApp.Controllers
         {
             if (ModelState.IsValid)
             {
+ 
                 _context.Add(artikl);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -74,8 +115,11 @@ namespace InventoryApp.Controllers
             ViewData["KategorijaId"] = new SelectList(_context.Kategorija, "Id", "Naziv", artikl.KategorijaId);
             ViewData["TipId"] = new SelectList(_context.Tip, "Id", "Naziv", artikl.TipId);
             ViewData["VrstaId"] = new SelectList(_context.Vrsta, "Id", "Naziv", artikl.VrstaId);
+
             return View(artikl);
         }
+
+
 
         // GET: Artikl/Edit/5
         public async Task<IActionResult> Edit(int? id)
