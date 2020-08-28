@@ -4,33 +4,80 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Artikli</h1>
 
-<h4>Artikl</h4>
+<h4>Dodavanje</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="IzvedbaId" class="control-label"></label>
-                <select asp-for="IzvedbaId" class ="form-control" asp-items="ViewBag.IzvedbaId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="TipId" class="control-label"></label>
-                <select asp-for="TipId" class ="form-control" asp-items="ViewBag.TipId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="VrstaId" class="control-label"></label>
-                <select asp-for="VrstaId" class ="form-control" asp-items="ViewBag.VrstaId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="KategorijaId" class="control-label"></label>
-                <select asp-for="KategorijaId" class ="form-control" asp-items="ViewBag.KategorijaId"></select>
+            <div class="form-row">
+                <div class="col">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="UsrChanged" value="@User.Identity.Name" />
+                    <div class="form-group">
+                        <label asp-for="KategorijaId" class="control-label"></label>
+                        <select asp-for="KategorijaId" class="form-control" asp-items="ViewBag.KategorijaId"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="VrstaId" class="control-label"></label>
+                        <select asp-for="VrstaId" class="form-control" asp-items="ViewBag.VrstaId"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TipId" class="control-label"></label>
+                        <select asp-for="TipId" class="form-control" asp-items="ViewBag.TipId"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="IzvedbaId" class="control-label"></label>
+                        <select asp-for="IzvedbaId" class="form-control" asp-items="ViewBag.IzvedbaId"></select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Ident" class="control-label"></label>
+                        <input asp-for="Ident" class="form-control" />
+                        <span asp-validation-for="Ident" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Napomena" class="control-label"></label>
+                        <input asp-for="Napomena" class="form-control" />
+                        <span asp-validation-for="Napomena" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="PocetnoStanje" class="control-label"></label>
+                        <input asp-for="PocetnoStanje" class="form-control" />
+                        <span asp-validation-for="PocetnoStanje" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Ulaz" class="control-label"></label>
+                        <input asp-for="Ulaz" class="form-control" />
+                        <span asp-validation-for="Ulaz" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Izlaz" class="control-label"></label>
+                        <input asp-for="Izlaz" class="form-control" />
+                        <span asp-validation-for="Izlaz" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="AktualnoStanje" class="control-label"></label>
+                        <input asp-for="AktualnoStanje" class="form-control" />
+                        <span asp-validation-for="AktualnoStanje" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ZavrsnoStanje" class="control-label"></label>
+                        <input asp-for="ZavrsnoStanje" class="form-control" />
+                        <span asp-validation-for="ZavrsnoStanje" class="text-danger"></span>
+                    </div>
+
+                </div>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
+
         </form>
     </div>
 </div>

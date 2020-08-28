@@ -3,14 +3,16 @@ using System;
 using InventoryApp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace InventoryApp.Migrations
 {
     [DbContext(typeof(inventoryContext))]
-    partial class inventoryContextModelSnapshot : ModelSnapshot
+    [Migration("20200828081927_IzmjenaArtikla")]
+    partial class IzmjenaArtikla
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
