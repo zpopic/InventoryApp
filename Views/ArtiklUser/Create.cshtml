@@ -1,0 +1,53 @@
+﻿@model InventoryApp.Models.Artikl
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+
+    <h4>Artikl</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="IzvedbaId" class="control-label"></label>
+                    <select asp-for="IzvedbaId" class="form-control" asp-items="ViewBag.IzvedbaId"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="TipId" class="control-label"></label>
+                    <select asp-for="TipId" class="form-control" asp-items="ViewBag.TipId"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="VrstaId" class="control-label"></label>
+                    <select asp-for="VrstaId" class="form-control" asp-items="ViewBag.VrstaId"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="KategorijaId" class="control-label"></label>
+                    <select asp-for="KategorijaId" class="form-control" asp-items="ViewBag.KategorijaId"></select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+</body>
+</html>

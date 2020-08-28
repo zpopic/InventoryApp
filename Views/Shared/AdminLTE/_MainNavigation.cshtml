@@ -53,7 +53,7 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a class="nav-link @Url.MakeActiveClass("Administration","ListRoles")"  asp-controller="Administration" asp-action="ListRoles">
+                                <a class="nav-link @Url.MakeActiveClass("Administration","ListRoles")" asp-controller="Administration" asp-action="ListRoles">
                                     <i class="fas fa-paint-roller nav-icon"></i>
                                     <p>Role</p>
                                 </a>
@@ -95,7 +95,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a  class="nav-link @Url.MakeActiveClass("Artikl","Index")"  asp-controller="Artikl" asp-action="Index">
+                                <a class="nav-link @Url.MakeActiveClass("Artikl","Index")" asp-controller="Artikl" asp-action="Index">
                                     <i class="fas fa-boxes nav-icon"></i>
                                     <p>Artikl</p>
                                 </a>
@@ -108,16 +108,12 @@
 
                 {
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Hello @User.Identity.Name!</p>
+                        <a class="nav-link @Url.MakeActiveClass("ArtiklUser","Index")" asp-controller="ArtiklUser" asp-action="Index">
+                            <i class="fas fa-boxes nav-icon"></i>
+                            <p>Artikl</p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                            <p>Logoff</p>
-                        </a>
-                    </li>
+
                 }
                 else
                 {
