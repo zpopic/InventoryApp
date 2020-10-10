@@ -3,11 +3,13 @@
 @{
     ViewData["Title"] = "Edit";
 
-    var AktualnoStanje1 = Model.PocetnoStanje + (Model.Ulaz - Model.Izlaz);
-    var ZavrsnoStanje1 = AktualnoStanje1;
+    var AktualnoStanje_kalk = Model.PocetnoStanje + (Model.Ulaz - Model.Izlaz);
+    var ZavrsnoStanje_kalk = AktualnoStanje_kalk;
 
-    Model.AktualnoStanje = AktualnoStanje1;
-    Model.ZavrsnoStanje = ZavrsnoStanje1;
+    Model.AktualnoStanje = AktualnoStanje_kalk;
+    Model.ZavrsnoStanje = ZavrsnoStanje_kalk;
+
+ 
 }
 
 <h1>Edit</h1>
@@ -76,7 +78,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="ZavrsnoStanje" class="control-label"></label>
-                        <input asp-for="@ZavrsnoStanje1" class="form-control" />
+                        <input asp-for="@ZavrsnoStanje_kalk" class="form-control"/>
                         <span asp-validation-for="ZavrsnoStanje" class="text-danger"></span>
                     </div>
                 </div>
