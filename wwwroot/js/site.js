@@ -35,11 +35,12 @@ function confirmDelete(uniqeUserId, isDeleteClicked) {
 
 
 
+// Skripta koja rjesava filtriranje drop down menija za visestruku pripadnost (primjer kategorija->vrst kad se odabire Tip aritkla!!)
 
     var kat = $('#kat');
     var vrst = $('#vrst');
 
-    kat.change(function () {
+    kat.change(function () { //Kad mijenjas drop-down box na kategoriji, napravi sve ovo dolje... klasterfak
 
         if ($(this).val() == -1) {
 
@@ -52,7 +53,7 @@ function confirmDelete(uniqeUserId, isDeleteClicked) {
         } else {
 
             $.ajax({
-                url: '/Tip/GetSub',
+                url: '/Tip/GetSub', //GetSub je metoda koja pretvara sadrzaj drop-down liste u json format i salje ovdje!
                 method: 'post',
                 data: { select: $(this).val() },
                 dataType: 'json',

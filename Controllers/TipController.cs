@@ -61,7 +61,7 @@ namespace InventoryApp.Controllers
         public JsonResult GetSub(int select)
         {
             var subcategories = _context.Vrsta.Where(c => c.KategorijaId == select).ToList(); // filtriranje Vrste po ID-u kategorije i spremanje u listu pa u polje
-            return Json(subcategories); // izbacivanje liste u json formatu za prihvat i parsanje u jquery-u
+            return Json(subcategories); // izbacivanje liste u json formatu za prihvat i parsanje u skriptu koja se nalazi u site.js!
         }
 
 
